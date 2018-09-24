@@ -29,7 +29,7 @@ const handlePost = (request, response, parsedUrl) => {
       body.push(chunk);
     });
 
-    request.on('end', (chunk) => {
+    request.on('end', () => {
       const bodyString = Buffer.concat(body).toString();
       console.dir(bodyString);
 
@@ -41,7 +41,6 @@ const handlePost = (request, response, parsedUrl) => {
 };
 
 const handleGet = (request, response, parsedUrl) => {
-
   if (urlStruct[parsedUrl.pathname]) {
     urlStruct[parsedUrl.pathname](request, response);
   } else {
@@ -55,7 +54,7 @@ const handleHead = (request, response, parsedUrl) => {
   } else {
     urlStruct.notFound(request, response);
   }
-}
+};
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);

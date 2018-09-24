@@ -6,7 +6,7 @@ const users = {};
 
 const respondJSON = (request, response, status, object) => {
   response.writeHead(status, {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   });
   response.write(JSON.stringify(object));
   response.end();
@@ -14,7 +14,7 @@ const respondJSON = (request, response, status, object) => {
 
 const respondJSONMeta = (request, response, status) => {
   response.writeHead(status, {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   });
   response.end();
 };
@@ -24,7 +24,7 @@ const getUsers = (request, response) => {
     users,
   };
 
-  if (request.method === "GET") {
+  if (request.method === 'GET') {
     respondJSON(request, response, 200, responseJSON);
   } else {
     respondJSONMeta(request, response, 200);
@@ -58,7 +58,6 @@ const addUser = (request, response, body) => {
   }
 
   return respondJSONMeta(request, response, responseCode);
-
 };
 
 const notFound = (request, response) => {
@@ -66,13 +65,12 @@ const notFound = (request, response) => {
     id: 'notFound',
     message: 'The page you are looking for is not found',
   };
-  
-  if(request.method === "GET"){
+
+  if (request.method === 'GET') {
     return respondJSON(request, response, 404, responseObj);
   }
-  else{
-    return respondJSONMeta(request,response, 404);
-  }
+
+  return respondJSONMeta(request, response, 404);
 };
 
 module.exports = {
