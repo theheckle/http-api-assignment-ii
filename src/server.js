@@ -42,17 +42,19 @@ const handlePost = (request, response, parsedUrl) => {
 
 const handleGet = (request, response, parsedUrl) => {
 
-  const acceptedTypes = request.headers.accept.split(',');
-
   if (urlStruct[parsedUrl.pathname]) {
-    urlStruct[parsedUrl.pathname](request, response, acceptedTypes);
+    urlStruct[parsedUrl.pathname](request, response);
   } else {
-    urlStruct.notFound(request, response, acceptedTypes);
+    urlStruct.notFound(request, response);
   }
 };
 
-const handleHead = (request, repsonse, parsedUrl) => {
-
+const handleHead = (request, response, parsedUrl) => {
+  if (urlStruct[parsedUrl.pathname]) {
+    urlStruct[parsedUrl.pathname](request, response);
+  } else {
+    urlStruct.notFound(request, response);
+  }
 }
 
 const onRequest = (request, response) => {
